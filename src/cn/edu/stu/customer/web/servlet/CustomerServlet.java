@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * web层
@@ -36,5 +37,18 @@ public class CustomerServlet extends BaseServlet {
         //将成功信息保存到request域中
         request.setAttribute("msg","恭喜，添加成功！");
         return "f:/msg.jsp";
+    }
+
+
+    public String findAll(HttpServletRequest request,HttpServletResponse response)
+            throws SQLException {
+
+        //查询所有记录
+        List<Customer> customerList=customerService.findAll();
+
+        //将记录保存到request域中返回
+        request.setAttribute("customerList",customerList);
+
+        return "f:/list.jsp";
     }
 }

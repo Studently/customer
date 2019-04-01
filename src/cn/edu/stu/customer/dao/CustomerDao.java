@@ -3,8 +3,10 @@ package cn.edu.stu.customer.dao;
 import cn.edu.stu.customer.domain.Customer;
 import cn.edu.stu.tools.jdbc.TrQueryRunner;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * dao层，操作数据库
@@ -32,4 +34,19 @@ public class CustomerDao {
         //执行插入
         qr.update(sql,params);
     }
+
+
+    /**
+     * 查询所有
+     * @throws SQLException
+     */
+    public List<Customer> findAll() throws SQLException {
+
+        //创建sql模板
+        String sql="select * from t_customer";
+
+        //查询结果，返回list
+        return qr.query(sql, new BeanListHandler<Customer>(Customer.class));
+    }
+
 }

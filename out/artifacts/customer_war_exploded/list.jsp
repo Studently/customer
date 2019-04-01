@@ -29,30 +29,21 @@
 		<th>描述</th>
 		<th>操作</th>
 	</tr>
-	<tr>
-		<td>张三</td>
-		<td>男</td>
-		<td>2013-05-05</td>
-		<td>13899996666</td>
-		<td>zhangSan@163.com</td>
-		<td>张三是谁？</td>
-		<td>
-			<a href="<c:url value='/edit.jsp'/>">编辑</a>
-			<a href="<c:url value='/msg.jsp'/>">删除</a>
-		</td>
-	</tr>
-	<tr>
-		<td>张三</td>
-		<td>男</td>
-		<td>2013-05-05</td>
-		<td>13899996666</td>
-		<td>zhangSan@163.com</td>
-		<td>张三是谁？</td>
-		<td>
-			<a href="<c:url value='/edit.jsp'/>">编辑</a>
-			<a href="<c:url value='/msg.jsp'/>">删除</a>
-		</td>
-	</tr>
+	<c:forEach items="${requestScope.customerList}" var="cl">
+		<tr>
+			<td>${cl.cname}</td>
+			<td>${cl.gender}</td>
+			<td>${cl.birthday}</td>
+			<td>${cl.cellphone}</td>
+			<td>${cl.email}</td>
+			<td>${cl.description}</td>
+			<td>
+				<a href="<c:url value='/edit.jsp'/>">编辑</a>
+				<a href="<c:url value='/msg.jsp'/>">删除</a>
+			</td>
+		</tr>
+	</c:forEach>
+
 </table>
   </body>
 </html>
