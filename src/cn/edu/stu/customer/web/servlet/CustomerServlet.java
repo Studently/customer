@@ -81,6 +81,13 @@ public class CustomerServlet extends BaseServlet {
     }
 
 
+    /**
+     * 编辑用户信息
+     * @param request
+     * @param response
+     * @return
+     * @throws SQLException
+     */
     public String edit(HttpServletRequest request,HttpServletResponse response) throws SQLException {
         //封装表单数据到用户对象
         Customer customer=CommonUtils.toBean(request.getParameterMap(),Customer.class);
@@ -88,6 +95,22 @@ public class CustomerServlet extends BaseServlet {
         customerService.edit(customer);
         //修改成功，返回提示信息
         request.setAttribute("msg","恭喜，用户信息修改成功！");
+        return "f:/msg.jsp";
+    }
+
+    /**
+     * 根据用户cid删除用户信息
+     * @param request
+     * @param response
+     * @return
+     */
+    public String delete(HttpServletRequest request,HttpServletResponse response) throws SQLException {
+        //获取用户cid
+        String cid=request.getParameter("cid");
+
+        customerService.delete(cid);
+
+        request.setAttribute("msg","恭喜，用户信息删除成功！");
         return "f:/msg.jsp";
     }
 }

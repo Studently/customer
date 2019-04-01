@@ -51,4 +51,13 @@ public class CustomerService {
     public void edit(Customer customer) throws SQLException {
         customerDao.edit(customer);
     }
+
+    /**
+     * 根据用户cid删除用户信息
+     * @param cid
+     * @throws SQLException
+     */
+    public void delete(String cid) throws SQLException {
+        customerDao.delete(cid);
+    }
 }

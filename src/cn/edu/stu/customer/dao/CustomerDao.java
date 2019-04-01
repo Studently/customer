@@ -79,4 +79,15 @@ public class CustomerDao {
         qr.update(sql,params);
     }
 
+
+    /**
+     * 根据用户的cid删除用户信息
+     * @param cid
+     */
+    public void delete(String cid) throws SQLException {
+
+        String sql="delete from t_customer where cid=?";
+        qr.update(sql,cid);
+    }
+
 }
