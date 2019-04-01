@@ -113,4 +113,20 @@ public class CustomerServlet extends BaseServlet {
         request.setAttribute("msg","恭喜，用户信息删除成功！");
         return "f:/msg.jsp";
     }
+
+    /**
+     * 多条件组合查询
+     * @param request
+     * @param response
+     * @return
+     */
+    public String query(HttpServletRequest request,HttpServletResponse response) throws SQLException {
+
+        //封装表单条件数据到用户对象中
+        Customer criteria=CommonUtils.toBean(request.getParameterMap(),Customer.class);
+
+        List<Customer> customerList=customerService.query(criteria);
+        request.setAttribute("customerList",customerList);
+        return "f:/list.jsp";
+    }
 }

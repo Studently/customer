@@ -60,4 +60,14 @@ public class CustomerService {
     public void delete(String cid) throws SQLException {
         customerDao.delete(cid);
     }
+
+
+    /**
+     * 多条件组合查询
+     * @param customer
+     * @throws SQLException
+     */
+    public List<Customer> query(Customer customer) throws SQLException {
+        return customerDao.query(customer);
+    }
 }

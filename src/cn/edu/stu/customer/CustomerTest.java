@@ -13,6 +13,7 @@ public class CustomerTest {
 
         CustomerService service=new CustomerService();
 
+        //向数据库中添加300行数据
         for(int i=0;i<300;i++){
             Customer c=new Customer();
             c.setCid(CommonUtils.uuid());

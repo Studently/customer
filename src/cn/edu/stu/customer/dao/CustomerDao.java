@@ -7,6 +7,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -88,6 +89,59 @@ public class CustomerDao {
 
         String sql="delete from t_customer where cid=?";
         qr.update(sql,cid);
+    }
+
+
+    /**
+     * 多条件组合查询
+     * 4个条件：用户名、性别、手机行、邮箱
+     * 其中除了性别以外，其他三个采用模糊查询
+     * @param customer
+     * @return
+     */
+    public List<Customer> query(Customer customer) throws SQLException {
+        /**
+         * 1、创建sql模板
+         *      这里考虑到4个条件可能不一定都有，使用StringBuilder添加条件
+         *
+         */
+        StringBuilder sql=new StringBuilder("select * from t_customer where 1=1 ");
+
+        List<Object> params=new ArrayList<>();
+        String cname=customer.getCname();
+        //如果用户名不为null不为空
+        if(cname!=null&&!cname.trim().isEmpty()){
+            sql.append("and cname like ?");
+            //添加参数
+            params.add("%"+cname+"%");
+        }
+
+        String gender=customer.getGender();
+        //如果用户名不为null不为空
+        if(gender!=null&&!gender.trim().isEmpty()){
+            sql.append("and gender=?");
+            //添加参数
+            params.add(gender);
+        }
+
+        String cellphone=customer.getCellphone();
+        //如果用户名不为null不为空
+        if(cellphone!=null&&!cellphone.trim().isEmpty()){
+            sql.append("and cellphone like ?");
+            //添加参数
+            params.add("%"+cellphone+"%");
+        }
+
+        String email=customer.getEmail();
+        //如果用户名不为null不为空
+        if(email!=null&&!email.trim().isEmpty()){
+            sql.append("and email like ?");
+            //添加参数
+            params.add("%"+email+"%");
+        }
+
+        return qr.query(sql.toString(),new BeanListHandler<Customer>(Customer.class),params.toArray());
+
     }
 
 }
