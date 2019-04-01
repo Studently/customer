@@ -57,7 +57,9 @@
   
   <body>
 <h3 align="center">添加客户</h3>
-<form action="<c:url value='/msg.jsp'/>" method="post">
+<form action="<c:url value='/CustomerServlet'/>" method="post">
+	<%--向CustomerServlet传递一个名叫method变量，值为add,代表请求add方法--%>
+	<input type="hidden" name="method" value="add"/>
 <table border="0" align="center" width="40%" style="margin-left: 100px;">
 	<tr>
 		<td width="100px">客户名称</td>

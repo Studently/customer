@@ -19,6 +19,6 @@
   </head>
   
   <body>
-    <h1 style="color:green;" align="center">恭喜，${msg }</h1>
+    <h1 style="color:green;" align="center">${msg }</h1>
   </body>
 </html>

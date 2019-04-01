@@ -12,7 +12,7 @@ public class Customer {
      * 	description	VARCHAR(500)
      */
 
-    private int cid;//id
+    private String cid;//id
     private String cname;//名字
     private String gender;//性别
     private String birthday;//生日
@@ -20,11 +20,11 @@ public class Customer {
     private String email;//邮箱
     private String description;//描述
 
-    public int getCid() {
+    public String getCid() {
         return cid;
     }
 
-    public void setCid(int cid) {
+    public void setCid(String cid) {
         this.cid = cid;
     }
 
