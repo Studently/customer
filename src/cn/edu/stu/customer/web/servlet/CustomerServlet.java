@@ -40,6 +40,13 @@ public class CustomerServlet extends BaseServlet {
     }
 
 
+    /**
+     * 查询用户所有信息
+     * @param request
+     * @param response
+     * @return
+     * @throws SQLException
+     */
     public String findAll(HttpServletRequest request,HttpServletResponse response)
             throws SQLException {
 
@@ -50,5 +57,37 @@ public class CustomerServlet extends BaseServlet {
         request.setAttribute("customerList",customerList);
 
         return "f:/list.jsp";
+    }
+
+
+    /**
+     * 编辑之前加载用户信息
+     * @param request
+     * @param response
+     * @return
+     * @throws SQLException
+     */
+    public String preEdit(HttpServletRequest request,HttpServletResponse response) throws SQLException {
+
+        //获取用户cid
+        String cid=request.getParameter("cid");
+
+        //根据用户cid加载用户信息
+        Customer customer=customerService.load(cid);
+
+        //保存用户信息到request域
+        request.setAttribute("customer",customer);
+        return "f:/edit.jsp";
+    }
+
+
+    public String edit(HttpServletRequest request,HttpServletResponse response) throws SQLException {
+        //封装表单数据到用户对象
+        Customer customer=CommonUtils.toBean(request.getParameterMap(),Customer.class);
+        //更新数据库
+        customerService.edit(customer);
+        //修改成功，返回提示信息
+        request.setAttribute("msg","恭喜，用户信息修改成功！");
+        return "f:/msg.jsp";
     }
 }

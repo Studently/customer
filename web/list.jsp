@@ -38,7 +38,7 @@
 			<td>${cl.email}</td>
 			<td>${cl.description}</td>
 			<td>
-				<a href="<c:url value='/edit.jsp'/>">编辑</a>
+				<a href="<c:url value='/CustomerServlet?method=preEdit&cid=${cl.cid}'/>">编辑</a>
 				<a href="<c:url value='/msg.jsp'/>">删除</a>
 			</td>
 		</tr>

@@ -30,4 +30,25 @@ public class CustomerService {
     public List<Customer> findAll() throws SQLException {
         return customerDao.findAll();
     }
+
+
+    /**
+     * 通过用户cid加载用户信息
+     * @param cid
+     * @return
+     * @throws SQLException
+     */
+    public Customer load(String cid) throws SQLException {
+        return customerDao.load(cid);
+    }
+
+
+    /**
+     * 编辑用户
+     * @param customer
+     * @throws SQLException
+     */
+    public void edit(Customer customer) throws SQLException {
+        customerDao.edit(customer);
+    }
 }
