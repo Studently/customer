@@ -2,6 +2,7 @@ package cn.edu.stu.customer.service;
 
 import cn.edu.stu.customer.dao.CustomerDao;
 import cn.edu.stu.customer.domain.Customer;
+import cn.edu.stu.customer.domain.PageBean;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -24,11 +25,14 @@ public class CustomerService {
     }
 
     /**
-     * 查询所有
+     * 分页查询所有
+     * @param pc 当前请求页
+     * @param ps 每页大小
+     * @return
      * @throws SQLException
      */
-    public List<Customer> findAll() throws SQLException {
-        return customerDao.findAll();
+    public PageBean<Customer> findAll(int pc, int ps) throws SQLException {
+        return customerDao.findAll(pc,ps);
     }
 
 
@@ -67,7 +71,7 @@ public class CustomerService {
      * @param customer
      * @throws SQLException
      */
-    public List<Customer> query(Customer customer) throws SQLException {
-        return customerDao.query(customer);
+    public PageBean<Customer> query(Customer customer,int pc,int ps) throws SQLException {
+        return customerDao.query(customer,pc,ps);
     }
 }

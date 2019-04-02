@@ -29,7 +29,7 @@
 		<th>描述</th>
 		<th>操作</th>
 	</tr>
-	<c:forEach items="${requestScope.customerList}" var="cl">
+	<c:forEach items="${requestScope.pb.beanList}" var="cl">
 		<tr>
 			<td>${cl.cname}</td>
 			<td>${cl.gender}</td>
@@ -45,5 +45,60 @@
 	</c:forEach>
 
 </table>
+<br/>
+  <center>
+	  第${requestScope.pb.pc}页/共${requestScope.pb.tp}页
+	  <a href="${requestScope.pb.url}&pc=1">首页</a>
+<c:if test="${requestScope.pb.pc > 1}">
+	  <a href="${requestScope.pb.url}&pc=${requestScope.pb.pc-1}">上一页</a>
+</c:if>
+
+
+	  <c:choose>
+		  <%--如果总页数小于等于10，全部显示出来--%>
+		  <c:when test="${requestScope.pb.tp<=10}">
+			  <c:set var="begin" value="1"/>
+			  <c:set var="end" value="${requestScope.pb.tp}"/>
+		  </c:when>
+		<%--如果总页数大于10--%>
+		  <c:otherwise>
+			  <%--保持当前页始终在第六位--%>
+			  <c:set var="begin" value="${requestScope.pb.pc-5}"/>
+			  <c:set var="end" value="${requestScope.pb.pc+4}"/>
+
+			  <%--头溢出--%>
+			  <c:if test="${begin <1}">
+				  <c:set var="begin" value="1"/>
+				  <c:set var="end" value="10"/>
+			  </c:if>
+
+			  <%--尾溢出--%>
+			  <c:if test="${end > requestScope.pb.tp}">
+				  <c:set var="end" value="${requestScope.pb.tp-9}"/>
+				  <c:set var="end" value="${requestScope.pb.tp}"/>
+			  </c:if>
+		  </c:otherwise>
+	  </c:choose>
+
+	  <c:forEach var="i" begin="${begin}" end="${end}">
+		  <c:choose>
+			  <c:when test="${requestScope.pb.pc eq i}">
+				  [${i}]
+			  </c:when>
+			  <c:otherwise>
+				  <a href="${requestScope.pb.url}&pc=${i}">[${i}]</a>
+			  </c:otherwise>
+		  </c:choose>
+
+
+
+	  </c:forEach>
+
+
+<c:if test="${requestScope.pb.pc < requestScope.pb.tp}">
+	  <a href="${requestScope.pb.url}&pc=${requestScope.pb.pc+1}">下一页</a>
+</c:if>
+	  <a href="${requestScope.pb.url}&pc=${requestScope.pb.tp}">尾页</a>
+  </center>
   </body>
 </html>
